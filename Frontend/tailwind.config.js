@@ -10,9 +10,10 @@ export default {
         montserrat: ['Montserrat', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
       },
       colors: {
+        'veryLight-purple':'#f4f1ff',
         'light-purple': '#b9bfff',
         'purple': '#8b74bd',
-        'darkblue': '#22277a',
+        'dark-blue': '#22277a',
         'neutral-bg': '#DDDDDD',
         'neutral-text': '#B3B3B3',
         'success': '#027E46',
