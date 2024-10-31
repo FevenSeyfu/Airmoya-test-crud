@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @font-face {
   font-family: 'Montserrat';
   src: url('../assets/fonts/Montserrat-Regular.ttf') format('truetype');
@@ -53,10 +56,4 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  --light-purple: #b9bfff;
-  --purple: #8b74bd;
-  --darkblue: #22277a;
-  --white: #fff;
-  --black: #000;
 }
