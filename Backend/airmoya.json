@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "1730763425243",
+      "username": "test",
+      "email": "test@test.com",
+      "password": "$2b$10$cH/NaPScKW5sc/r3Z6WlvOJYf.pmJW9NPt31Jv0apmRIdlZ.dNB0."
+    }
+  ],
+  "images": [],
+  "messages": [],
+  "services": []
+}

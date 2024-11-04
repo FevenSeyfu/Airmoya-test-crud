@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src",
+      "paths": {
+        "@components/*": ["components/*"],
+        "@pages/*": ["pages/*"],
+        "@layouts/*": ["layouts/*"],
+        "@utils/*": ["utils/*"],
+        "@redux/*": ["redux/*"],
+      },
+      "lib": ["dom", "es6"] 
+    },
+    "include": ["src"]
+  }

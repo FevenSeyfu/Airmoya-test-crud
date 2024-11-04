@@ -42,24 +42,26 @@ const PhotoGallery = () => {
   }, [photos]);
 
   return (
-    <article className="w-full md:w-2/3 bg-white rounded-lg shadow-sm shadow-dark-blue p-4 relative flex flex-col gap-y-2">
-      <Typography variant="h1" weight="strong" color="primaryHeading">
-        My Photos
-      </Typography>
+    <article className="w-full h-full bg-white rounded-lg shadow-sm relative flex flex-col gap-y-2">
+      <div className="p-2">
+        <Typography variant="h2" weight="strong" color="primaryHeading">
+          My Photos
+        </Typography>
+      </div>
       {isLoading ? (
-       <div className="flex items-start justify-center">
-         <Audio
-        height="100"
-        width="100"
-        color="#8b74bd"
-        ariaLabel="audio-loading"
-        wrapperStyle={{}}
-        wrapperClass="wrapper-class"
-        visible={true}
-        />
-       </div>
+        <div className="flex items-start justify-center">
+          <Audio
+            height="100"
+            width="100"
+            color="#8b74bd"
+            ariaLabel="audio-loading"
+            wrapperStyle={{}}
+            wrapperClass="wrapper-class"
+            visible={true}
+          />
+        </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4  z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2  z-10">
           {photos.map((photo, index) => (
             <div
               key={index}

@@ -1,11 +1,10 @@
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
+import multer from 'multer'
+import fs from 'fs'
+import path from 'path'
 
-// Define storage for the images
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '../uploads');
+    const uploadPath = path.join(__dirname, '../storage/localStorage');
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath);
     }
@@ -17,10 +16,9 @@ const storage = multer.diskStorage({
   },
 });
 
-// Multer configuration with validation
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const fileTypes = /jpeg|jpg|png/;
     const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
@@ -34,4 +32,4 @@ const upload = multer({
   },
 });
 
-module.exports = upload;
+export default upload

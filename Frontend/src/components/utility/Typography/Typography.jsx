@@ -33,6 +33,7 @@ const Typography = ({
 
   const colorStyles = {
     primary: 'text-black',
+    secondary: 'text-gray-700',
     white: 'text-white',
     warning: 'text-warning',
     disabled: 'text-neutral-text',
@@ -91,6 +92,7 @@ Typography.propTypes = {
   weight: PropTypes.oneOf(['strong', 'semiBold', 'medium', 'regular']),
   color: PropTypes.oneOf([
     'primary',
+    'secondary',
     'success',
     'warning',
     'error',

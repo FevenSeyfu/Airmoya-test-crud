@@ -1,7 +1,7 @@
-const express = require('express');
-const { uploadImage } = require('../controllers/imageController');
+import express from 'express';
+import { uploadImage }  from '../controllers/imageController.js';
 const router = express.Router();
 
 router.post('/upload', uploadImage);
 
-module.exports = router;
+export default router

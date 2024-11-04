@@ -1,9 +1,13 @@
-const users = [];
+import { getCollection, saveCollection } from '../storage/localStorage.js';
 
-module.exports = {
-    findUserByEmail: (email) => users.find(user => user.email === email),
-    createUser: (user) => {
-        users.push(user);
-        return user;
-    }
+export const findUserByEmail = (email) => {
+    const users = getCollection('users');
+    return users.find(user => user.email === email);
+};
+
+export const createUser = (user) => {
+    const users = getCollection('users');
+    users.push(user);
+    saveCollection('users', users);
+    return user;
 };

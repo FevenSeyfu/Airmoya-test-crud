@@ -1,9 +1,8 @@
-let messages = [];
+export let messages = [];
 
-module.exports = {
-    getMessages: () => messages,
-    addMessage: (message) => {
-        messages.push(message);
-        return message;
-    }
+export const getMessages = () => messages;
+
+export const addMessage = (message) => {
+    messages.push(message);
+    return message;
 };

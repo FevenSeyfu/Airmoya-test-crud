@@ -1,8 +1,8 @@
-const express = require('express');
-const { getMessages, addMessage } = require('../controllers/messageController');
+import express from 'express';
+import { getMessages, addMessage } from '../controllers/messageController.js';
 const router = express.Router();
 
 router.get('/', getMessages);
 router.post('/', addMessage);
 
-module.exports = router;
+export default router;
