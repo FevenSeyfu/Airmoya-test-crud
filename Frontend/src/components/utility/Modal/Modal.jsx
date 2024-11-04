@@ -4,7 +4,7 @@ import { IoMdClose } from 'react-icons/io';
 
 Modal.setAppElement('#root');
 
-const ModalComponent = ({ modalLabel, isOpen, onRequestClose, children }) => {
+const ModalComponent = ({ modalLabel, isOpen, onRequestClose, children,className }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -13,7 +13,7 @@ const ModalComponent = ({ modalLabel, isOpen, onRequestClose, children }) => {
       overlayClassName="fixed inset-0 bg-black bg-opacity-25"
       contentLabel={modalLabel}
     >
-      <div className="relative bg-white text-black rounded-xl shadow-md shadow-light-purple p-6 flex flex-col w-2/3 max-w-lg mx-auto">
+      <div className={`relative bg-white text-black rounded-xl shadow-md shadow-light-purple p-6 flex flex-col w-2/3 max-w-lg mx-auto ${className}`}>
         <button
           onClick={onRequestClose}
           className="absolute top-4 right-4 text-dark-blue hover:text-white hover:bg-dark-blue rounded-md"
