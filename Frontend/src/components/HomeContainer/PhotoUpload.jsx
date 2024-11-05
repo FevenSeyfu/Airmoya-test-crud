@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { uploadImage } from "@redux/uploadSlice";
 import Typography from "../utility/Typography/Typography";
 import Button from "../utility/Button/Button";
@@ -7,6 +7,8 @@ import { MdCloudUpload } from "react-icons/md";
 
 const PhotoUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [triggerUpload, setTriggerUpload] = useState(false);
+  const { id } = useSelector((state) => state.auth.user);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
@@ -28,12 +30,21 @@ const PhotoUpload = () => {
 
   const handleUpload = () => {
     if (selectedFile) {
-      dispatch(uploadImage(selectedFile));
+      setTriggerUpload(true);
     }
   };
 
+  useEffect(() => {
+    if (triggerUpload && selectedFile) {
+      dispatch(uploadImage({ file: selectedFile, userId: id })).then(() => {
+        setSelectedFile(null);
+        setTriggerUpload(false);
+      });
+    }
+  }, [triggerUpload, selectedFile, id, dispatch]);
+
   return (
-    <article className="w-full h-full bg-white rounded-lg shadow-sm flex flex-col gap-y-2 p-4">
+    <article className="w-full h-full max-h-[350px] bg-white rounded-lg shadow-sm flex flex-col gap-y-2 p-4">
       <div className="p-2">
         <Typography variant="h2" weight="strong" color="primaryHeading">
           Upload Image
@@ -58,14 +69,16 @@ const PhotoUpload = () => {
             {error}
           </Typography>
         )}
-        <div className="flex gap-x-2 mt-4">
-          <Button type="button" elType="secondary" onClick={() => setSelectedFile(null)}>
-            Cancel
-          </Button>
-          <Button type="button" elType="primary" onClick={handleUpload}>
-            Confirm
-          </Button>
-        </div>
+       {selectedFile && (
+          <div className="flex gap-x-2 mt-4">
+            <Button type="button" elType="secondary" onClick={() => setSelectedFile(null)}>
+              Cancel
+            </Button>
+            <Button type="button" elType="primary" onClick={handleUpload}>
+              Confirm
+            </Button>
+          </div>
+        )}
       </div>
     </article>
   );

@@ -1,6 +1,6 @@
 import multer from 'multer';
 import path from 'path';
-import { getCollection, saveCollection } from '../storage/localStorage.js';
+import { addImage } from '../storage/localStorage.js';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
+    limits: { fileSize: 5 * 1024 * 1024 }, 
     fileFilter: (req, file, cb) => {
         const filetypes = /jpeg|jpg|png/;
         const mimetype = filetypes.test(file.mimetype);
@@ -30,10 +30,35 @@ export const uploadImage = (req, res) => {
         if (err) {
             return res.status(400).json({ error: err.message });
         }
-        const images = getCollection('images');
-        const newImage = { id: Date.now().toString(), path: req.file.path };
-        images.push(newImage);
-        saveCollection('images', images);
-        res.status(200).json({ message: 'Image uploaded successfully', file: req.file });
+        if (!req.file) {
+            return res.status(400).json({ error: 'No file uploaded' });
+        }
+        const userId = req.body.userId; 
+        const newImage = { 
+            id: Date.now().toString(), 
+            userId, 
+            path: req.file.path,
+            uploadedAt: new Date().toISOString() 
+        };
+        
+        addImage(newImage);
+        res.status(200).json({ message: 'Image uploaded successfully', file: newImage });
     });
+};
+
+import { getCollection } from '../storage/localStorage.js';
+
+export const getImagesByUserId = (req, res) => {
+    const userId = req.params.id;
+    const images = getCollection('images');
+
+    // Filter images based on the user ID
+    const userImages = images.filter(image => image.userId === userId);
+    console.log('User Images:', userImages); // Debugging log
+
+    if (userImages.length === 0) {
+        return res.status(404).json({ message: 'No images found for this user.' });
+    }
+
+    res.status(200).json(userImages);
 };

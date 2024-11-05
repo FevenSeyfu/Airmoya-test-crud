@@ -2,7 +2,7 @@ import React from 'react'
 
 const ServicesList = () => {
   return (
-    <div>ServicesList</div>
+    <div className='bg-white h-[500px]'>ServicesList</div>
   )
 }
 

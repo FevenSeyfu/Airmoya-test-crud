@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchImages } from "@redux/uploadSlice";
 import { MdChevronRight } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ModalComponent from "../utility/Modal/Modal";
 import Typography from "../utility/Typography/Typography";
 import { Audio } from "react-loader-spinner";
 
-const PhotoGallery = () => {
-  const photos = Array.from({ length: 7 }, (_, index) => ({
-    src: `https://loremflickr.com/200/200?random=${index + 1}`,
-    title: `Photo ${index + 1}`,
-    size: "200x200",
-    fileType: "jpg",
-  }));
-
+const PhotoGallery = ({ sliceImages = false }) => {
+  const baseUrl = import.meta.env.VITE_API_URL;
+  const dispatch = useDispatch();
+  const { images, status, error } = useSelector((state) => state.upload);
+  const { id } = useSelector((state) => state.auth.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(fetchImages(id));
+  }, [dispatch, id]);
 
   const openModal = (photo) => {
     setSelectedPhoto(photo);
@@ -27,28 +29,16 @@ const PhotoGallery = () => {
     setSelectedPhoto(null);
   };
 
-  useEffect(() => {
-    const imagePromises = photos.map((photo) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.src = photo.src;
-        img.onload = resolve;
-      });
-    });
-
-    Promise.all(imagePromises).then(() => {
-      setIsLoading(false);
-    });
-  }, [photos]);
+  const displayedImages = sliceImages ? images.slice(0, 5) : images;
 
   return (
-    <article className="w-full h-full bg-white rounded-lg shadow-sm relative flex flex-col gap-y-2">
+    <article className="w-full  h-full bg-white rounded-lg shadow-sm relative flex flex-col gap-y-2">
       <div className="p-2">
         <Typography variant="h2" weight="strong" color="primaryHeading">
           My Photos
         </Typography>
       </div>
-      {isLoading ? (
+      {status === 'loading' ? (
         <div className="flex items-start justify-center">
           <Audio
             height="100"
@@ -60,36 +50,56 @@ const PhotoGallery = () => {
             visible={true}
           />
         </div>
+      ) : displayedImages.length === 0 ? (
+        <div className="flex items-center justify-center h-full md:min-h-[280px]">
+          <Typography variant="h4" weight="medium" color="primary">
+            No Images uploaded yet
+          </Typography>
+        </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2  z-10">
-          {photos.map((photo, index) => (
-            <div
-              key={index}
-              className={`relative overflow-hidden row-span-2 ${
-                index === 0 ? "col-span-2 " : "col-span-1 "
-              }`}
-              onClick={() => openModal(photo)}
-            >
-              <img
-                src={photo.src}
-                alt={photo.title}
-                className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-              />
-            </div>
-          ))}
+        <div className={` grid ${sliceImages ? ' grid-cols-2 md:grid-cols-4 md:row-span-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-2 z-60`}>
+          {displayedImages.map((photo, index) => {
+            const isLastRow = displayedImages.length - index <= 3; 
+            const isLastImage = index === displayedImages.length - 1; 
+            const columnSpan = isLastRow
+              ? displayedImages.length % 3 === 1 && isLastImage 
+                ? 'lg:col-span-3'
+                : displayedImages.length % 3 === 2 && isLastImage 
+                ? 'md:col-span-2'
+                : ''
+              : ''; 
+
+            return (
+              <div
+                key={index}
+                className={`relative overflow-hidden row-span-2 ${
+                  index === 0 && sliceImages ? "col-span-3  " : "col-span-1 "
+                } ${columnSpan}`}
+                onClick={() => openModal(photo)}
+              >
+                <img
+                  src={`${baseUrl}/${photo.path}`}
+                  alt={photo.title}
+                  className={`w-full ${sliceImages ? 'h-[150px] md:h-[200px]' : 'h-full max-h-[300px] md:max-h-[500px] '} object-cover opacity-90 hover:opacity-100 transition-opacity duration-300 cursor-pointer `}
+                />
+              </div>
+            );
+          })}
         </div>
       )}
-      <Link
-        to="/gallery"
-        className={`${
-          isModalOpen || isLoading ? "hidden" : "absolute"
-        } bottom-4 right-4 text-white flex items-center gap-x-2 animate-pulse p-4 rounded-md z-20 bg-black bg-opacity-75`}
-      >
-        <span className="text-2xl underline-offset-4 hover:underline transition-all duration-500">
-          View All Photos
-        </span>
-        <MdChevronRight size={24} />
-      </Link>
+      {sliceImages && (
+        <Link
+          to="/gallery"
+          className={`${
+            isModalOpen || status === 'loading' || images.length === 0 ? "hidden" : "absolute"
+          } bottom-4 right-4 text-white flex items-center gap-x-2 animate-pulse p-4 rounded-md z-20 bg-black bg-opacity-75`}
+        >
+          <span className="text-2xl underline-offset-4 hover:underline transition-all duration-500">
+            View All Photos
+          </span>
+          <MdChevronRight size={24} />
+        </Link>
+      )}
       {selectedPhoto && (
         <ModalComponent
           isOpen={isModalOpen}
@@ -98,7 +108,7 @@ const PhotoGallery = () => {
           className="flex flex-col items-left justify-start text-right"
         >
           <img
-            src={selectedPhoto.src}
+            src={`${baseUrl}/${selectedPhoto.path}`}
             alt={selectedPhoto.title}
             className="w-full h-auto my-6 "
           />

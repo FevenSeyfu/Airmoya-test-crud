@@ -16,9 +16,9 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
 export const loginUser = createAsyncThunk('auth/loginUser', async (userData, { rejectWithValue }) => {
   try {
     const response = await apiRequest('POST', 'auth/login', userData);
-    const user = { email: userData.email }; 
-    setItem('userInfo', { token: response.token, user });
-    return { user, token: response.token };
+    const user = { email: userData.email, password: userData.password };
+    setItem('userInfo', { token: response.token, user:response.user });
+    return { user:response.user, token: response.token,message:response.message };
   } catch (error) {
     return rejectWithValue(error.response.data);
   }

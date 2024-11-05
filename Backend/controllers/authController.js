@@ -29,8 +29,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
-    const user = await findUserByEmail(email); // Make sure to await the function if it returns a promise.
-
+    const user = await findUserByEmail(email); 
     if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(401).json({ error: 'Invalid email or password.' });
     }
@@ -38,7 +37,9 @@ export const login = async (req, res) => {
     const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '30d' });
     res.status(200).json({
         message: 'Login successful.',
-        user: { id: user.id, username: user.username, email: user.email }, // Return user info
+        user: { id: user.id, username: user.username, email: user.email }, 
         token
     });
 };
+
+

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { console } from 'inspector';
 import path from 'path';
 
 const dbPath = path.resolve('airmoya.json');
@@ -25,3 +26,19 @@ export const saveCollection = (name, collection) => {
     db[name] = collection;
     writeDB(db);
 };
+
+export const addImage = (image) => {
+    const images = getCollection('images');
+  
+    if (!image.id || !image.path) {
+      throw new Error('Invalid image object. Must include id and path.');
+    }
+  
+    images.push(image);
+    console.log(images)
+    saveCollection('images', images);
+  };
+  
+  export const getImages = () => {
+    return getCollection('images');
+  };

@@ -5,9 +5,64 @@
       "username": "test",
       "email": "test@test.com",
       "password": "$2b$10$cH/NaPScKW5sc/r3Z6WlvOJYf.pmJW9NPt31Jv0apmRIdlZ.dNB0."
+    },
+    {
+      "id": "1730816204794",
+      "username": "testuser",
+      "email": "test1@test.com",
+      "password": "$2b$10$gnI69CQ7bsUbEXc45Jdsg.6TpqISxzkRmWiTvvoOXK7.fNNUrQU2."
+    },
+    {
+      "id": "1730817112253",
+      "username": "test2",
+      "email": "test2@test.com",
+      "password": "$2b$10$3KQDrDeTB8Rlwx9LMJjPvuqqMJ4J5172DlVOnCg9lqT0YJwxpzjcG"
     }
   ],
-  "images": [],
+  "images": [
+    {
+      "id": "1730830297341",
+      "userId": "1730763425243",
+      "path": "uploads/1730830297313-patricia-jekki-Ivk-PoOLjf8-unsplash.jpg",
+      "uploadedAt": "2024-11-05T18:11:37.341Z"
+    },
+    {
+      "id": "1730830339042",
+      "userId": "1730763425243",
+      "path": "uploads/1730830339019-ioann-mark-kuznietsov-xxvc9yXTXbg-unsplash.jpg",
+      "uploadedAt": "2024-11-05T18:12:19.042Z"
+    },
+    {
+      "id": "1730830344557",
+      "userId": "1730763425243",
+      "path": "uploads/1730830344532-alberto-restifo-KhVz325yjbA-unsplash.jpg",
+      "uploadedAt": "2024-11-05T18:12:24.557Z"
+    },
+    {
+      "id": "1730830353728",
+      "userId": "1730763425243",
+      "path": "uploads/1730830353706-ioann-mark-kuznietsov-xxvc9yXTXbg-unsplash.jpg",
+      "uploadedAt": "2024-11-05T18:12:33.728Z"
+    },
+    {
+      "id": "1730830368745",
+      "userId": "1730763425243",
+      "path": "uploads/1730830368696-alberto-restifo-KhVz325yjbA-unsplash.jpg",
+      "uploadedAt": "2024-11-05T18:12:48.745Z"
+    },
+    {
+      "id": "1730830406050",
+      "userId": "1730763425243",
+      "path": "uploads/1730830406016-milind-bedwa-R7u0x7sYP3Q-unsplash.jpg",
+      "uploadedAt": "2024-11-05T18:13:26.050Z"
+    },
+    {
+      "id": "1730830421762",
+      "userId": "1730763425243",
+      "path": "uploads/1730830421737-massimiliano-morosinotto--6hvB84fyYA-unsplash.jpg",
+      "uploadedAt": "2024-11-05T18:13:41.762Z"
+    }
+  ],
   "messages": [],
   "services": []
 }
