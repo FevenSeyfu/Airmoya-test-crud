@@ -32,14 +32,14 @@ const PhotoGallery = ({ sliceImages = false }) => {
   const displayedImages = sliceImages ? images.slice(0, 5) : images;
 
   return (
-    <article className="w-full  h-full bg-white rounded-lg shadow-sm relative flex flex-col gap-y-2">
+    <article className="w-full h-full min-h-[450px] bg-white rounded-lg shadow-sm relative flex flex-col gap-y-2">
       <div className="p-2">
         <Typography variant="h2" weight="strong" color="primaryHeading">
           My Photos
         </Typography>
       </div>
       {status === 'loading' ? (
-        <div className="flex items-start justify-center">
+        <div className="h-full min-h-[450px] w-full flex items-center justify-center">
           <Audio
             height="100"
             width="100"

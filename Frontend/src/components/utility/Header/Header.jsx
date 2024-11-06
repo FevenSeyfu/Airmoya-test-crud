@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full h-20 lg:h-24 flex flex-row items-center justify-between bg-light-purple px-4 md:px-6 relative">
+    <header className="w-full h-20 lg:h-24 flex flex-row items-center justify-between bg-light-purple py-4 px-8 md:py-6 md:px-12 lg:px-20 relative">
       <Link to="/">
         <Typography variant="h2" weight="strong" className="italic">
           Airmoya
@@ -61,7 +61,7 @@ const Header = () => {
           )}
         </ul>
       </nav>
-      <button className="md:hidden z-20 mr-4" onClick={toggleMenu} aria-label="Toggle menu">
+      <button className="md:hidden z-20 " onClick={toggleMenu} aria-label="Toggle menu">
         {isMenuOpen ? (
           <IoMdClose size={30} className="text-dark-blue hover:text-white hover:bg-dark-blue rounded-md" />
         ) : (

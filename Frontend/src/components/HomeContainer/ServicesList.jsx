@@ -6,10 +6,20 @@ import UpdateServiceModal from "../Service/UpdateService/UpdateServiceModal";
 import DeleteServiceModal from "../Service/DeleteService/DeleteServiceModal";
 import ServiceItem from "../Service/ShowService/ServiceItem";
 import Typography from "../utility/Typography/Typography";
+import Pagination from "../utility/Pagination/Pagination"; 
 import { fetchServices } from "@redux/serviceSlice";
+
+const Skeleton = ({ width, height }) => {
+  return (
+    <div
+      className={`bg-gray-200 animate-pulse rounded ${width} ${height}`}
+    ></div>
+  );
+};
 
 const ServicesList = () => {
   const services = useSelector((state) => state.services.services || []);
+  const status = useSelector((state) => state.services.status);
   const dispatch = useDispatch();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -17,6 +27,8 @@ const ServicesList = () => {
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
   const [sortOption, setSortOption] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const servicesPerPage = 5;
 
   useEffect(() => {
     dispatch(fetchServices());
@@ -53,6 +65,10 @@ const ServicesList = () => {
     setIsSortMenuOpen(false);
   };
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   const sortedServices = [...services].sort((a, b) => {
     if (sortOption === "A-Z") {
       return a.title.localeCompare(b.title);
@@ -64,8 +80,13 @@ const ServicesList = () => {
     return 0;
   });
 
+  const indexOfLastService = currentPage * servicesPerPage;
+  const indexOfFirstService = indexOfLastService - servicesPerPage;
+  const currentServices = sortedServices.slice(indexOfFirstService, indexOfLastService);
+  const totalPages = Math.ceil(sortedServices.length / servicesPerPage);
+
   return (
-    <div className="bg-white h-[500px] rounded-2xl flex flex-col gap-y-4 md:px-4">
+    <div className="bg-white h-full lg:max-h-[500px] rounded-2xl flex flex-col md:px-4 pb-8">
       <div className="flex justify-between items-center p-2 md:p-4">
         <div className="py-2">
           <Typography variant="h2" weight="strong" color="primaryHeading">
@@ -119,15 +140,54 @@ const ServicesList = () => {
           </button>
         </div>
       </div>
-      {services.length === 0 ? (
+      {status === "loading" ? (
+        <div className="flex w-full items-center justify-center p-2 md:p-6">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="flex flex-row items-start w-full">
+                <th className="border-b py-2 w-1/3 md:w-[15%] lg:w-[10%] text-left">
+                  <Skeleton width="w-full" height="h-6" />
+                </th>
+                <th className="border-b py-2 w-1/3 md:w-[15%] lg:w-[10%] text-left">
+                  <Skeleton width="w-full" height="h-6" />
+                </th>
+                <th className="border-b py-2 w-1/3 md:w-[45%] lg:w-[65%] text-left hidden md:flex">
+                  <Skeleton width="w-full" height="h-6" />
+                </th>
+                <th className="border-b py-2 w-1/3 md:w-[15%] text-left flex justify-center md:justify-start md:items-center">
+                  <Skeleton width="w-full" height="h-6" />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <tr key={index} className="flex flex-row items-start w-full">
+                  <td className="border-b py-2 w-1/3 md:w-[15%] lg:w-[10%] text-left">
+                    <Skeleton width="w-full" height="h-6" />
+                  </td>
+                  <td className="border-b py-2 w-1/3 md:w-[15%] lg:w-[10%] text-left">
+                    <Skeleton width="w-full" height="h-6" />
+                  </td>
+                  <td className="border-b py-2 md:w-[50%] lg:w-[60%] hidden md:flex">
+                    <Skeleton width="w-full" height="h-6" />
+                  </td>
+                  <td className="border-b py-2 w-1/3 md:w-[15%] text-left flex flex-row justify-center md:items-center gap-x-2">
+                    <Skeleton width="w-full" height="h-6" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : services.length === 0 ? (
         <div className="flex items-center justify-center h-full">
           <p>No Services added at the moment</p>
         </div>
       ) : (
-        <div className="flex w-full items-center justify-center p-2 md:p-6">
+        <div className="flex w-full items-center justify-center p-2 md:p-6 md:pb-3">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="flex flex-row items-start gap-x-2 lg:gap-x-4 w-full">
+              <tr className="flex flex-row items-start w-full">
                 <th className="border-b py-2 w-1/3 md:w-[15%] lg:w-[10%] text-left">
                   <Typography variant="h3" weight="medium" color="primary">
                     Service
@@ -138,12 +198,12 @@ const ServicesList = () => {
                     Status
                   </Typography>
                 </th>
-                <th className="border-b py-2 w-1/3 md:w-[50%] lg:w-[60%] hidden md:flex">
-                  <Typography variant="h3" weight="medium" color="primary" className="pr-4 lg:pr-8 text-left ">
+                <th className="border-b py-2 w-1/3 md:w-[45%] lg:w-[65%] text-left hidden md:flex">
+                  <Typography variant="h3" weight="medium" color="primary">
                     Description
                   </Typography>
                 </th>
-                <th className="border-b py-2 w-1/3 md:w-[15%] text-left flex flex-row justify-center md:items-center">
+                <th className="border-b py-2 w-1/3 md:w-[15%] text-left flex justify-center md:justify-start md:items-center">
                   <Typography variant="h3" weight="medium" color="primary">
                     Action
                   </Typography>
@@ -151,8 +211,8 @@ const ServicesList = () => {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(sortedServices) &&
-                sortedServices.map((service) => (
+              {Array.isArray(currentServices) &&
+                currentServices.map((service) => (
                   <ServiceItem
                     key={service.id}
                     service={service}
@@ -163,6 +223,13 @@ const ServicesList = () => {
             </tbody>
           </table>
         </div>
+      )}
+      {sortedServices.length > servicesPerPage && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       )}
       <AddServiceModal isOpen={isAddModalOpen} onRequestClose={closeAddModal} />
       <UpdateServiceModal
