@@ -36,7 +36,7 @@ const ServiceItem = ({ service, onEdit, onDelete }) => {
           {service.status}
         </Typography>
       </td>
-      <td className="border-b py-2 md:w-[50%] lg:w-[60%] hidden md:flex">
+      <td className="border-b py-2 md:w-[45%] lg:w-[60%] hidden md:flex">
         <Typography variant="body1" weight="medium" color="primary"  className="pr-4 lg:pr-8 text-left ">
           {service.description}
         </Typography>

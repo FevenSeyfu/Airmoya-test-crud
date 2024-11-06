@@ -35,11 +35,6 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link className="md:text-xl lg:text-2xl hover:text-dark-blue underline-offset-4 hover:underline transition-colors duration-300" to="/services">
-                  Services
-                </Link>
-              </li>
-              <li>
                 <Link className="md:text-xl lg:text-2xl hover:text-dark-blue underline-offset-4 hover:underline transition-colors duration-300" to="/gallery">
                   Gallery
                 </Link>
@@ -83,12 +78,6 @@ const Header = () => {
                   <Link className="w-full text-2xl group-hover:bg-veryLight-purple group-hover:text-purple border-l-8 border-white hover:border-purple px-5 py-4 transition-colors duration-300 flex items-center gap-2" to="/chats" onClick={toggleMenu}>
                     <IoMdChatbubbles />
                     Chats
-                  </Link>
-                </li>
-                <li className="group w-full">
-                  <Link className="w-full text-2xl group-hover:bg-veryLight-purple group-hover:text-purple border-l-8 border-white hover:border-purple px-5 py-4 transition-colors duration-300 flex items-center gap-2" to="/services" onClick={toggleMenu}>
-                    <MdWork />
-                    Services
                   </Link>
                 </li>
                 <li className="group w-full">

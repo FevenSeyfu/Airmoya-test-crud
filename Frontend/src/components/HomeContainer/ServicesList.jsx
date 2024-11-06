@@ -86,8 +86,8 @@ const ServicesList = () => {
   const totalPages = Math.ceil(sortedServices.length / servicesPerPage);
 
   return (
-    <div className="bg-white h-full lg:max-h-[500px] rounded-2xl flex flex-col md:px-4 pb-8">
-      <div className="flex justify-between items-center p-2 md:p-4">
+    <div className="bg-white h-full lg:max-h-[550px] rounded-2xl flex flex-col md:px-4 pb-8">
+      <div className="flex justify-between items-center py-2 px-6  md:p-6">
         <div className="py-2">
           <Typography variant="h2" weight="strong" color="primaryHeading">
             Services
@@ -184,10 +184,10 @@ const ServicesList = () => {
           <p>No Services added at the moment</p>
         </div>
       ) : (
-        <div className="flex w-full items-center justify-center p-2 md:p-6 md:pb-3">
+        <div className="flex w-full items-center justify-center py-2 px-6 md:p-6 md:pb-3">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="flex flex-row items-start w-full">
+            <tr className="flex flex-row items-start gap-x-2 lg:gap-x-4 w-full">
                 <th className="border-b py-2 w-1/3 md:w-[15%] lg:w-[10%] text-left">
                   <Typography variant="h3" weight="medium" color="primary">
                     Service
@@ -198,7 +198,7 @@ const ServicesList = () => {
                     Status
                   </Typography>
                 </th>
-                <th className="border-b py-2 w-1/3 md:w-[45%] lg:w-[65%] text-left hidden md:flex">
+                <th className="border-b py-2 w-1/3 md:w-[45%] lg:w-[60%] text-left hidden md:flex">
                   <Typography variant="h3" weight="medium" color="primary">
                     Description
                   </Typography>

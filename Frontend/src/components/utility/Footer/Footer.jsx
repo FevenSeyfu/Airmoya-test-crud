@@ -36,14 +36,6 @@ const Footer = () => {
           <li>
             <Link
               className="hover:text-dark-blue underline-offset-4 hover:underline transition-colors duration-300"
-              to="/services"
-            >
-              Services
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="hover:text-dark-blue underline-offset-4 hover:underline transition-colors duration-300"
               to="/chats"
             >
               Chats
