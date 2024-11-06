@@ -64,5 +64,30 @@
     }
   ],
   "messages": [],
-  "services": []
+  "services": [
+    {
+      "id": "1730840842241",
+      "title": "Service 2",
+      "description": "Description of Service 2",
+      "status": "active"
+    },
+    {
+      "id": "1730841888628",
+      "title": "Service 1",
+      "description": "Lorem ipsum dolor sit amet consectetur adipiscing elit, congue blandit bibendum ultricies magna pellentesque vel feugiat, eget eros faucibus ",
+      "status": "pending"
+    },
+    {
+      "id": "1730841913026",
+      "title": "Service 3",
+      "description": "Lorem ipsum dolor sit amet consectetur s faucibus ",
+      "status": "pending"
+    },
+    {
+      "id": "1730841922193",
+      "title": "Service 4",
+      "description": "Lorem ipsum dolor sit amet consectetur s faucibus ",
+      "status": "pending"
+    }
+  ]
 }

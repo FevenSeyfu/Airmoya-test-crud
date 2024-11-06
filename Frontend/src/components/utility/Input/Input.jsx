@@ -16,7 +16,7 @@ const InputField = ({
   onChange,
   onBlur,
 }) => {
-  const sizeClass = size === "large" ? "h-20" : "h-16";
+  const sizeClass = size === "large" ? "h-16" : "h-12";
   const stateClasses = {
     default: "border-dark-blue focus:outline-dark-blue focus:outline-2",
     active: "border-info focus:outline-info focus:outline-2",
