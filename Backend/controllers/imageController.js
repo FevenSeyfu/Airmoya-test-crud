@@ -52,9 +52,7 @@ export const getImagesByUserId = (req, res) => {
     const userId = req.params.id;
     const images = getCollection('images');
 
-    // Filter images based on the user ID
     const userImages = images.filter(image => image.userId === userId);
-    console.log('User Images:', userImages); // Debugging log
 
     if (userImages.length === 0) {
         return res.status(404).json({ message: 'No images found for this user.' });

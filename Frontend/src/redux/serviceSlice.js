@@ -23,7 +23,8 @@ export const updateService = createAsyncThunk('services/updateService', async ({
 });
 
 export const deleteService = createAsyncThunk('services/deleteService', async (id) => {
-  const response = await apiRequest('DELETE', `services/${id}`);
+  // Ensure no body is passed
+  await apiRequest('DELETE', `services/${id}`);
   return id;
 });
 

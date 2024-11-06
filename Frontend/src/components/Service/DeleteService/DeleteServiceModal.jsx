@@ -6,7 +6,8 @@ import { deleteService } from '@redux/serviceSlice';
 const DeleteServiceModal = ({ isOpen, onRequestClose, serviceId }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
+  const handleDelete = (e) => {
+    e.preventDefault();
     dispatch(deleteService(serviceId));
     onRequestClose();
   };

@@ -28,12 +28,14 @@ export const updateService = (req, res) => {
 
 export const deleteService = (req, res) => {
     const { id } = req.params;
+    console.log('Delete request received for ID:', id);
     const services = getCollection('services');
-    const index = services.findIndex(service => service.id === id);
+    const index = services.findIndex((service) => service.id === id);
+
     if (index !== -1) {
         const deletedService = services.splice(index, 1);
         saveCollection('services', services);
-        res.status(200).json(deletedService[0]);
+        res.status(200).json({ service: deletedService[0], message: 'Service deleted successfully' });
     } else {
         res.status(404).json({ error: 'Service not found.' });
     }

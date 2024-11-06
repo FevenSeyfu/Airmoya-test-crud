@@ -106,7 +106,7 @@ const AddServiceModal = ({ isOpen, onRequestClose }) => {
             <option value="pending">Pending</option>
             <option value="approved">Approved</option>
             <option value="completed">Completed</option>
-            <option value="cancelled">Cancelled</option>
+            <option value="cancelled">Cancelled</option> 
           </select>
         </div>
         <div className="flex items-center justify-between">
