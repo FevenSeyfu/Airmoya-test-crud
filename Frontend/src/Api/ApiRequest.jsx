@@ -7,7 +7,6 @@ const apiRequest = async (method, endpoint, data = null, config = {}) => {
   const storedUserInfo = getItem("userInfo");
   const userToken = storedUserInfo ? storedUserInfo.token : null;
 
-  // Default configuration
   const defaultConfig = {
     method: method,
     url: `${baseUrl}/${endpoint}`,
@@ -30,7 +29,7 @@ const apiRequest = async (method, endpoint, data = null, config = {}) => {
     const response = await axios(finalConfig);
     return response.data;
   } catch (error) {
-    console.error("API request error:", error);
+    // console.error("API request error:", error);
     throw error.response ? error.response.data : error.message;
   }
 };
