@@ -1,3 +1,5 @@
+![demo image](https://github.com/user-attachments/assets/9437dd37-e270-46bf-ab69-be7277b8ba50)
+
 # AirMoya Mini Test Project
 
 This is a mini test project for **AirMoya**, showcasing a simple content management system with an image gallery, services management (CRUD operations), and a real-time chat feature. The application uses **React**, **Redux Toolkit**, and **Tailwind CSS** on the frontend, with **Express**, **Socket.IO**, and **Local Storage** on the backend.
