@@ -15,7 +15,7 @@ const ChatRoomList = ({ onChatClick }) => {
   }, [dispatch, userId]);
 
   const filteredMessages = messages?.filter((chat) =>
-    chat.room.includes(userId)
+    chat.room?.includes(userId)
   );
 
   if (loading) return <p>Loading...</p>;
