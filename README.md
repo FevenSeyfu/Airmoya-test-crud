@@ -3,8 +3,8 @@
 This is a mini test project for **AirMoya**, showcasing a simple content management system with an image gallery, services management (CRUD operations), and a real-time chat feature. The application uses **React**, **Redux Toolkit**, and **Tailwind CSS** on the frontend, with **Express**, **Socket.IO**, and **Local Storage** on the backend.
 
 ### Live Demo
-- **Frontend**: [Live Site on Netlify](#)
-- **Backend**: Hosted on Render, connected to Netlify for live updates
+- **Frontend**: [Live Site on Netlify](https://airmoya-crud.netlify.app/)
+- **Backend**: [Hosted on Render](https://airmoya-test-crud.onrender.com), connected to Netlify for live updates
 
 ### Repository Link
 - **Repository**: [GitHub Repo](https://github.com/FevenSeyfu/Airmoya-test-crud)
@@ -97,7 +97,7 @@ npm run dev
 The frontend should now be available at http://localhost:5173.
 
 ## Features
-- **User Registration**: Go to /login or /register to authenticate user.
+- **User Registration**: Go to '/login' or '/register' to authenticate user.
 - **Image Upload**: Go to the gallery page to upload and view images.
-- **Manage Services**: Add, edit, delete, and view services in the Services section.
+- **Manage Services**: Add, edit, delete,view and sort services in the Services section.
 - **Real-Time Chat**: Access the chat page to send and receive messages in real time.
