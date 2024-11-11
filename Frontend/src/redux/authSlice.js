@@ -1,49 +1,74 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import apiRequest from '../Api/ApiRequest';
-import { setItem, getItem } from '../utils/localStorage';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import apiRequest from "../Api/ApiRequest";
+import { setItem, getItem } from "../utils/localStorage";
 
-export const registerUser = createAsyncThunk('auth/registerUser', async (userData, { rejectWithValue }) => {
-  try {
-    const response = await apiRequest('POST', 'auth/register', userData);
-    const user = { id: response.userId, username: userData.username, email: userData.email }; // Assuming response has userId
-    setItem('userInfo', { token: response.token, user });
-    return { user, token: response.token }; 
-  } catch (error) {
-    return rejectWithValue(error.response.data);
+export const registerUser = createAsyncThunk(
+  "auth/registerUser",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await apiRequest("POST", "auth/register", userData);
+      const user = {
+        id: response.userId,
+        username: userData.username,
+        email: userData.email,
+      };
+      setItem("userInfo", { token: response.token, user });
+      return { user, token: response.token };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
-export const loginUser = createAsyncThunk('auth/loginUser', async (userData, { rejectWithValue }) => {
-  try {
-    const response = await apiRequest('POST', 'auth/login', userData);
-    const user = { email: userData.email, password: userData.password };
-    setItem('userInfo', { token: response.token, user:response.user });
-    return { user:response.user, token: response.token,message:response.message };
-  } catch (error) {
-    return rejectWithValue(error.response.data);
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await apiRequest("POST", "auth/login", userData);
+      const user = { email: userData.email, password: userData.password };
+      setItem("userInfo", { token: response.token, user: response.user });
+      return {
+        user: response.user,
+        token: response.token,
+        message: response.message,
+      };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
+
+export const fetchUsers = createAsyncThunk(
+  "users/fetchUsers",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiRequest("GET", "auth/users");
+      return response;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : error.message
+      );
+    }
+  }
+);
 
 const initialState = {
   user: null,
+  userList: [],
   loading: false,
   error: null,
 };
 
-const rehydrateState = () => {
-  const userInfo = getItem('userInfo');
-  return userInfo ? { user: userInfo.user, loading: false, error: null } : initialState;
-};
-
 const authSlice = createSlice({
-  name: 'auth',
-  initialState: rehydrateState(),
+  name: "auth",
+  initialState, 
   reducers: {
     logout: (state) => {
       state.user = null;
+      state.userList = [];
       state.loading = false;
       state.error = null;
-      localStorage.removeItem('userInfo');
+      localStorage.removeItem("userInfo");
     },
   },
   extraReducers: (builder) => {
@@ -58,7 +83,10 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.error || action.payload.message || 'Registration failed';
+        state.error =
+          action.payload.error ||
+          action.payload.message ||
+          "Registration failed";
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -70,7 +98,20 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.error || action.payload.message || 'Login failed';
+        state.error =
+          action.payload.error || action.payload.message || "Login failed";
+      })
+      .addCase(fetchUsers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userList = action.payload;
+      })
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to fetch users";
       });
   },
 });

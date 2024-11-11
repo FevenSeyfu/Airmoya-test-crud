@@ -8,6 +8,7 @@ import authRoutes from './routes/authRoutes.js';
 import imageRoutes from './routes/imageRoutes.js';
 import messageRoutes from './routes/messageRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
+import { getCollection, saveCollection } from './storage/localStorage.js';
 
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -20,19 +21,38 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
-// Socket.IO setup for real-time messaging
+app.use((req, res, next) => {
+    req.io = io;
+    next();
+});
+
 io.on('connection', (socket) => {
     console.log('New client connected');
 
+    socket.on('joinRoom', ({ room }) => {
+        socket.join(room);
+        console.log(`User joined room: ${room}`);
+    });
+
     socket.on('sendMessage', (message) => {
-        io.emit('receiveMessage', message);
+        const { room, sender, receiver, text, file, timestamp } = message;
+        const messages = getCollection('messages');
+        const roomMessages = messages.find(msg => msg.room === room);
+
+        if (roomMessages) {
+            roomMessages.messages.push({ sender, receiver, text, file, timestamp });
+        } else {
+            messages.push({ room, messages: [{ sender, receiver, text, file, timestamp }] });
+        }
+
+        saveCollection('messages', messages);
+        io.to(room).emit('receiveMessage', message);
     });
 
     socket.on('disconnect', () => {
         console.log('Client disconnected');
     });
 });
-
 
 app.use('/auth', authRoutes);
 app.use('/images', imageRoutes);

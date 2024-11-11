@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { console } from 'inspector';
 import path from 'path';
 
 const dbPath = path.resolve('airmoya.json');
@@ -35,10 +34,9 @@ export const addImage = (image) => {
     }
   
     images.push(image);
-    console.log(images)
     saveCollection('images', images);
-  };
+};
   
-  export const getImages = () => {
+export const getImages = () => {
     return getCollection('images');
-  };
+};

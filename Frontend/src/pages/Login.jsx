@@ -6,7 +6,6 @@ import Typography from "@components/utility/Typography/Typography";
 import Button from "@components/utility/Button/Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CryptoJS from "crypto-js";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -63,7 +62,8 @@ const Login = () => {
     }
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     if (!validateEmail(email)) {
       toast.error("Invalid email format");
       return;
@@ -72,14 +72,16 @@ const Login = () => {
       toast.error("Password cannot be empty");
       return;
     }
-    const hashedPassword = CryptoJS.SHA256(password).toString();
-    const resultAction = await dispatch(loginUser({ email, password: hashedPassword }));
+  
+    const resultAction = await dispatch(loginUser({ email, password }));
     if (loginUser.fulfilled.match(resultAction)) {
       navigate('/');
     } else {
       toast.error("Login failed: " + error);
     }
   };
+  
+
   const isFormValid = validateEmail(email) && password.length > 0;
 
   return (
@@ -87,7 +89,7 @@ const Login = () => {
       <Typography variant="h1" weight="strong" color="primaryHeading">
         Login
       </Typography>
-      <form className="w-full flex flex-col items-start gap-y-4">
+      <form className="w-full flex flex-col items-start gap-y-4" onSubmit={handleLogin}>
         <InputField
           placeholder="Enter Email"
           value={email}
@@ -112,7 +114,7 @@ const Login = () => {
           isRequired={true}
           label="Password"
         />
-        <Button type='submit' onClick={handleLogin} disabled={loading || !isFormValid}>
+        <Button type='submit' >
           Login
         </Button>
       </form>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '../../utility/Typography/Typography';
 
-const Chat = ({ chat, onChatClick }) => {
+const Chat = ({ userName, lastMessage, onChatClick }) => {
   return (
     <article
       className="w-full h-full border-2 border-neutral-200 shadow-sm rounded-2xl p-3 flex items-center"
@@ -11,10 +11,10 @@ const Chat = ({ chat, onChatClick }) => {
         <img src='/images/user-avatar.jpg' className='h-16 w-16' />
         <div className="flex flex-col justify-start">
           <Typography variant="h3" weight="medium" color="primary">
-            {chat.name}
+            {userName ? userName : 'User Name'}
           </Typography>
           <p className=' text-base font-normal line-clamp-1'>
-            {chat.message}
+            {lastMessage ? lastMessage : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'}
           </p>
         </div>
       </div>

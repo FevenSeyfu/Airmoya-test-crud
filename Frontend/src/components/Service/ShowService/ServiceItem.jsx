@@ -49,7 +49,7 @@ const ServiceItem = ({ service, onEdit, onDelete }) => {
           <IoMdCreate className="md:mr-1 h-5 w-5 font-bold md:h-6 md:w-6" />
           <Typography
             variant="body2"
-            weight="normal"
+            weight="regular"
             color="white"
             className="hidden md:flex"
           >
@@ -63,7 +63,7 @@ const ServiceItem = ({ service, onEdit, onDelete }) => {
           <IoMdTrash className="md:mr-1" size={24} />
           <Typography
             variant="body2"
-            weight="normal"
+            weight="regular"
             color="white"
             className="hidden md:flex"
           >

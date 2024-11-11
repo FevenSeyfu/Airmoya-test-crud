@@ -82,7 +82,7 @@ const Register = () => {
       registerUser({
         username: form.username.value,
         email: form.email.value,
-        password: hashedPassword,
+        password: form.email.password,
       })
     )
       .unwrap()

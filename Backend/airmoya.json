@@ -3,20 +3,20 @@
     {
       "id": "1730763425243",
       "username": "test",
-      "email": "test@test.com",
-      "password": "$2b$10$cH/NaPScKW5sc/r3Z6WlvOJYf.pmJW9NPt31Jv0apmRIdlZ.dNB0."
-    },
-    {
-      "id": "1730816204794",
-      "username": "testuser",
       "email": "test1@test.com",
-      "password": "$2b$10$gnI69CQ7bsUbEXc45Jdsg.6TpqISxzkRmWiTvvoOXK7.fNNUrQU2."
+      "password": "$2b$10$.MxigAfufnWavUS.j4F7ruNDnh1Qg05vn0EnLlb1KODlWsezdurEi"
     },
     {
-      "id": "1730817112253",
-      "username": "test2",
-      "email": "test2@test.com",
-      "password": "$2b$10$3KQDrDeTB8Rlwx9LMJjPvuqqMJ4J5172DlVOnCg9lqT0YJwxpzjcG"
+      "id": "1731094774837",
+      "username": "test3",
+      "email": "test3@test.com",
+      "password": "$2b$10$cgZM2LmztWauiolUmwWoyegbZe.l1twtv0uRrRArzCIUqowo.HX96"
+    },
+    {
+      "id": "1731097240641",
+      "username": "test4",
+      "email": "test4@test.com",
+      "password": "$2b$10$UTh2FCwJ0MUk3BX1yz6k5OxykFQMgHMvwUiwh1jC5PNJUMuvxmdgm"
     }
   ],
   "images": [
@@ -63,7 +63,92 @@
       "uploadedAt": "2024-11-05T18:13:41.762Z"
     }
   ],
-  "messages": [],
+  "messages": [
+    {
+      "room": "1730763425243-1731094774837",
+      "messages": [
+        {
+          "id": "1731104481073",
+          "sender": "1730763425243",
+          "receiver": 1731094774837,
+          "text": "hello how are you",
+          "file": null,
+          "timestamp": "2024-11-08T22:21:21.073Z"
+        },
+        {
+          "id": "1731104525546",
+          "sender": "1731094774837",
+          "receiver": 1730763425243,
+          "text": "I am good thanks!",
+          "file": null,
+          "timestamp": "2024-11-08T22:22:05.546Z"
+        },
+        {
+          "sender": "1730763425243",
+          "receiver": "1731094774837",
+          "text": "test",
+          "file": null,
+          "timestamp": "2024-11-09T00:18:49.774Z"
+        },
+        {
+          "sender": "1730763425243",
+          "receiver": "1731094774837",
+          "text": "test 2\n",
+          "file": null,
+          "timestamp": "2024-11-09T00:18:58.441Z"
+        },
+        {
+          "sender": "1730763425243",
+          "receiver": "1731094774837",
+          "text": "test 4",
+          "file": null,
+          "timestamp": "2024-11-09T00:19:07.220Z"
+        }
+      ]
+    },
+    {
+      "room": "1730763425243-1731097240641",
+      "messages": [
+        {
+          "id": "1731104481073",
+          "sender": "1731097240641",
+          "receiver": 1730763425243,
+          "text": "test realtime chat\n",
+          "file": null,
+          "timestamp": "2024-11-08T22:21:21.073Z"
+        },
+        {
+          "id": "1731104525546",
+          "sender": "1731097240641",
+          "receiver": 1730763425243,
+          "text": "test 2\n",
+          "file": null,
+          "timestamp": "2024-11-08T22:22:05.546Z"
+        },
+        {
+          "id": "1731107675898",
+          "sender": "1730763425243",
+          "receiver": 1731097240641,
+          "text": "test 2\n",
+          "file": null,
+          "timestamp": "2024-11-08T23:14:35.898Z"
+        }
+      ]
+    },
+    {
+      "room": "1730763425243-1730763425243",
+      "messages": [
+        {
+          "id": "1731114641178",
+          "sender": "1730763425243",
+          "receiver": 1730763425243,
+          "text": "test 4\n",
+          "file": null,
+          "timestamp": "2024-11-09T01:10:41.178Z"
+        }
+      ]
+    }
+  ],
   "services": [
     {
       "id": "1730840842241",
